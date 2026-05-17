@@ -385,7 +385,32 @@
         <p class="section__desc">Наши винтажные тележки полностью укомплектованы выбранными вами вкусами, дружелюбным мороженщиком и всеми топпингами, о которых только могут мечтать ваши гости.</p>
       </div>
 
-      <div class="catering__grid">
+
+
+        <div class="catering__grid">
+  {% for ice_cream in products %}
+    <a href="{% url 'product_detail' pk=ice_cream.pk %}" class="cart-card-link" style="text-decoration: none; color: inherit;">
+
+      <div class="cart-card reveal">
+        <div class="cart-card__visual">
+          <img src="{{ ice_cream.photo.url }}" alt="{{ ice_cream.title }}" loading="lazy">
+          <span class="cart-card__visual-label">Камерная</span>
+        </div>
+        <div class="cart-card__body">
+          <h3 class="cart-card__name">{{ ice_cream.title }}</h3>
+          <p class="cart-card__desc">{{ ice_cream.description }}</p>
+          <div class="cart-card__details">
+            <span class="cart-card__detail">До 30 гостей</span>
+            <span class="cart-card__detail">3 вкуса</span>
+            <span class="cart-card__detail">2 часа</span>
+          </div>
+          <div class="cart-card__price">{{ ice_cream.price }} <small>/ мероприятие</small></div>
+        </div>
+      </div>
+
+    </a>
+  {% endfor %}
+</div>
         <div class="cart-card reveal">
           <div class="cart-card__visual">
             <img src="{% static 'images/the-mini-scoop.avif' %}" alt="Тележка с мороженым для небольшой вечеринки" loading="lazy">
@@ -440,6 +465,7 @@
           </div>
         </div>
       </div>
+
     </section>
 
     <section class="section" id="seasonal">
