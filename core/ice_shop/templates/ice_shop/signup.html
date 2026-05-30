@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frost — Регистрация</title>
+    <!-- Bootstrap 5 + иконки + шрифты -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Цветовая палитра Frost (холодные оттенки + тёплые акценты) */
+        :root {
+            --frost-blue: #D4E9FF;
+            --frost-deep: #2C4C6B;
+            --frost-snow: #F8FAFE;
+            --frost-ice: #EFF5FF;
+            --frost-coral: #F4A261;    /* тёплый акцент как у «тёплых сердец» */
+            --frost-gold: #E9C46A;
+            --frost-dark: #1E2F3F;
+            --frost-mint: #C7F9E9;
+        }
+
+        body {
+            background: linear-gradient(145deg, var(--frost-snow) 0%, var(--frost-ice) 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            margin: 0;
+        }
+
+        /* карточка в стиле «кремового рожка» */
+        .frost-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 48px 32px 56px 32px;
+            border: none;
+            box-shadow: 0 25px 45px -12px rgba(44, 76, 107, 0.25), 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+        }
+
+        .frost-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 32px 48px -16px rgba(44, 76, 107, 0.3);
+        }
+
+        .frost-header {
+            background: linear-gradient(105deg, var(--frost-deep) 0%, #3B6B8F 100%);
+            padding: 1.8rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--frost-coral);
+        }
+
+        .frost-header h2 {
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            font-size: 2rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .frost-header h2 i {
+            color: var(--frost-gold);
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .frost-subhead {
+            color: rgba(255,255,240,0.85);
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .frost-body {
+            padding: 2rem 2rem 1.8rem;
+        }
+
+        /* стилизация полей ввода как у «собери свой десерт» */
+        .form-control, .frost-input {
+            border-radius: 60px;
+            border: 1.5px solid #E2EDF7;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
+            background-color: #ffffff;
+            transition: all 0.2s;
+            color: var(--frost-dark);
+        }
+
+        .form-control:focus {
+            border-color: var(--frost-coral);
+            box-shadow: 0 0 0 4px rgba(244, 162, 97, 0.2);
+            outline: none;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            color: var(--frost-deep);
+            letter-spacing: 0.3px;
+            display: block;
+        }
+
+        .btn-frost {
+            background: linear-gradient(95deg, var(--frost-deep), #3B6B8F);
+            border: none;
+            border-radius: 60px;
+            padding: 0.85rem 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            transition: all 0.2s;
+            box-shadow: 0 4px 8px rgba(44,76,107,0.2);
+        }
+
+        .btn-frost:hover {
+            background: linear-gradient(95deg, #1E3A4F, #2C5A7A);
+            transform: scale(1.01);
+            box-shadow: 0 8px 18px rgba(44,76,107,0.3);
+            color: white;
+        }
+
+        .btn-frost-outline {
+            background: transparent;
+            border: 2px solid var(--frost-deep);
+            border-radius: 60px;
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            color: var(--frost-deep);
+            transition: 0.2s;
+        }
+
+        .btn-frost-outline:hover {
+            background: var(--frost-deep);
+            color: white;
+        }
+
+        .frost-link {
+            color: var(--frost-coral);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--frost-coral);
+            transition: 0.2s;
+        }
+
+        .frost-link:hover {
+            color: var(--frost-deep);
+            border-bottom-color: var(--frost-deep);
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--frost-blue), var(--frost-coral), transparent);
+            margin: 1rem 0 1.2rem;
+        }
+
+        /* custom alerts (logout message) */
+        .ice-message {
+            background: var(--frost-mint);
+            border-radius: 100px;
+            padding: 0.7rem 1.2rem;
+            font-weight: 500;
+            color: #1F5E3A;
+            text-align: center;
+            border-left: 6px solid var(--frost-coral);
+        }
+
+        /* для форм Django style */
+        .frost-body ul, .errorlist {
+            font-size: 0.75rem;
+            color: #D9534F;
+            padding-left: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .frost-body input, .frost-body select, .frost-body textarea {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        small.hint {
+            display: block;
+            font-size: 0.7rem;
+            color: #6c8fae;
+            margin-top: -8px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 550px) {
+            .frost-body { padding: 1.5rem; }
+            .frost-header h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="max-width: 520px;">
+    <div class="frost-card">
+        <div class="frost-header">
+            <h2>
+                <i class="fas fa-ice-cream"></i>
+                Создать аккаунт
+            </h2>
+            <div class="frost-subhead">🍦 Холодные лакомства для тёплых сердец</div>
+        </div>
+        <div class="frost-body">
+            <!-- В реальном Django-проекте используй: {% csrf_token %} и {{ form.as_p }} -->
+            <!-- но для демонстрации вёрстки показываем форму с макетом, сохраняя полную аналогию -->
+            <form method="post">
+                <!-- CSRF будет в шаблоне Django, здесь пример статической формы полностью стилизованной -->
+                <div class="form-group">
+                    <label><i class="fas fa-user me-1"></i> Имя пользователя</label>
+                    <input type="text" class="form-control" placeholder="Например: frost_lover" value="">
+                    <small class="hint">Обязательно. Только буквы, цифры и @/./+/-/_</small>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Электронная почта</label>
+                    <input type="email" class="form-control" placeholder="hello@frost.ru" value="">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Пароль</label>
+                    <input type="password" class="form-control" placeholder="••••••••">
+                    <small class="hint">Пароль не должен быть слишком простым.</small>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-check-circle"></i> Подтверждение пароля</label>
+                    <input type="password" class="form-control" placeholder="Повторите пароль">
+                </div>
+                <button class="btn btn-frost w-100 mt-2" type="submit">
+                    <i class="fas fa-snowflake me-2"></i>Создать аккаунт
+                </button>
+            </form>
+            <div class="divider"></div>
+            <p class="text-center mb-2">
+                Уже есть аккаунт? <a href="#" class="frost-link">Войти в морозильню</a>
+            </p>
+            <p class="text-center mt-2">
+                <a href="index.html" class="frost-link"><i class="fas fa-home"></i> На главную Frost</a>
+            </p>
+            <div class="text-center mt-3">
+                <span class="badge bg-light text-dark rounded-pill px-3 py-2"><i class="far fa-smile"></i> Более 2000 комбинаций вкуса</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- скрытая навигация чтобы сохранить стиль - для демо, но в реальном проекте будет меню -->
+</body>
+</html>

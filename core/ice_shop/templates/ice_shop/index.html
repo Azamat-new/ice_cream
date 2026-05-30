@@ -46,14 +46,62 @@
       </ul>
     </nav>
 
-    <div class="sidebar__footer">
-      <div class="sidebar__hours">
-        <strong>Часы работы</strong><br>
-        Пн – Пт: 11:00 – 21:00<br>
-        Сб – Вс: 10:00 – 22:00
-      </div>
+<div class="sidebar__footer">
+
+  <style>
+    .sidebar__auth-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-auth {
+      flex: 1;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    /* Кнопка Регистрации */
+    .btn-auth--signup {
+      background-color: #007bff;
+      color: #ffffff;
+      border: 1px solid #007bff;
+    }
+    .btn-auth--signup:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    /* Кнопка Войти */
+    .btn-auth--login {
+      background-color: transparent;
+      color: #333333;
+      border: 1px solid #ccc;
+    }
+    .btn-auth--login:hover {
+      background-color: #f8f9fa;
+      border-color: #999;
+    }
+  </style>
+
+  <div class="sidebar__hours">
+
+    <div class="sidebar__auth-group">
+      <a href="{% url 'signup' %}" class="btn-auth btn-auth--signup">Регистрация</a>
+      <a href="{% url 'login' %}" class="btn-auth btn-auth--login">Войти</a>
     </div>
-  </aside>
+
+    <strong>Часы работы</strong><br>
+    Пн – Пт: 11:00 – 21:00<br>
+    Сб – Вс: 10:00 – 22:00
+
+  </div>
+</div>  </aside>
 
   <main class="main">
 

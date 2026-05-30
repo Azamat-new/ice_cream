@@ -1,5 +1,21 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import IceCream
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, 'ice_shop/signup.html', {'form': form})
+
+
 
 # def index(request):
 #     return render(request, 'ice_shop/index.html')
